@@ -19,7 +19,7 @@ generate-release-resource: $(K8S_RESOURCE_TEMP_FOLDER)
 	@cp manifests/cert-manager.yaml ${K8S_RESOURCE_TEMP_YAML}
 
 .PHONY: cert-manager-release
-cert-manager: ## Interactively starts the release workflow.
+cert-manager-release: ## Interactively starts the release workflow.
 	@echo "Starting git flow release..."
 	@build/make/release.sh cert-manager
 
