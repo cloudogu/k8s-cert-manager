@@ -35,7 +35,7 @@ node('docker') {
                                         make 'helm-update-dependencies'
                                         make 'crd-helm-generate'
                                         make 'helm-generate'
-                                        archiveArtifacts 'target/k8s/**/*'
+                                        archiveArtifacts "${helmTargetDir}/**/*"
                                     }
 
                                     stage("Lint helm") {
