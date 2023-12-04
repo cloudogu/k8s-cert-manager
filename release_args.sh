@@ -6,6 +6,7 @@ set -o pipefail
 componentTemplateFile=k8s/helm/component-patch-tpl.yaml
 certManagerTempChart="/tmp/cert-manager"
 certManagerTempValues="${certManagerTempChart}/values.yaml"
+certManagerTempChartYaml="${certManagerTempChart}/Chart.yaml"
 
 # this function will be sourced from release.sh and be called from release_functions.sh
 update_versions_modify_files() {
@@ -21,27 +22,30 @@ update_versions_modify_files() {
   echo "Extract cert-manager helm chart"
   tar -zxvf "${certManagerPackage}" -C "/tmp" > /dev/null
 
+  local certManagerAppVersion
+  certManagerAppVersion=$(yq '.appVersion' < "${certManagerTempChartYaml}")
+
   echo "Set images in component patch template"
 
   local certManagerControllerRepo
   certManagerControllerRepo=$(yq '.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerController" "${certManagerControllerRepo}:${certManagerVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerController" "${certManagerControllerRepo}:${certManagerAppVersion}"
 
   local webhookRepo
   webhookRepo=$(yq '.webhook.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerWebhook" "${webhookRepo}:${certManagerVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerWebhook" "${webhookRepo}:${certManagerAppVersion}"
 
   local cainInjectorRepo
   cainInjectorRepo=$(yq '.cainjector.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerCainjector" "${cainInjectorRepo}:${certManagerVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerCainjector" "${cainInjectorRepo}:${certManagerAppVersion}"
 
   local acmesolverRepo
   acmesolverRepo=$(yq '.acmesolver.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerAcmesolver" "${acmesolverRepo}:${certManagerVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerAcmesolver" "${acmesolverRepo}:${certManagerAppVersion}"
 
   local startupApiCheckRepo
   startupApiCheckRepo=$(yq '.startupapicheck.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerStartupapicheck" "${startupApiCheckRepo}:${certManagerVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerStartupapicheck" "${startupApiCheckRepo}:${certManagerAppVersion}"
 
   rm -rf ${certManagerTempChart}
 }
@@ -56,5 +60,3 @@ setAttributeInComponentPatchTemplate() {
 update_versions_stage_modified_files() {
   git add "${componentTemplateFile}"
 }
-
-update_versions_modify_files
