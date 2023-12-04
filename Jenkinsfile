@@ -50,6 +50,7 @@ node('docker') {
                     }
 
                     stage('Deploy k8s-cert-manager') {
+                        k3d.helm("install ${repositoryName}-crd ${helmCRDChartDir}")
                         k3d.helm("install ${repositoryName} ${helmChartDir}")
                     }
 
