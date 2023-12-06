@@ -1,0 +1,30 @@
+apiVersion: v1
+values:
+  images:
+    certManagerController: quay.io/jetstack/cert-manager-controller:v1.13.1
+    certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.13.1
+    certManagerCainjector: quay.io/jetstack/cert-manager-cainjector:v1.13.1
+    certManagerAcmesolver: quay.io/jetstack/cert-manager-acmesolver:v1.13.1
+    certManagerStartupapicheck: quay.io/jetstack/cert-manager-ctl:v1.13.1
+patches:
+  values.yaml:
+    certManager:
+      image:
+        repository: "{{ registryFrom .images.certManagerController }}/{{ repositoryFrom .images.certManagerController }}"
+        tag: "{{ tagFrom .images.certManagerController }}"
+      webhook:
+        image:
+          repository: "{{ registryFrom .images.certManagerWebhook }}/{{ repositoryFrom .images.certManagerWebhook }}"
+          tag: "{{ tagFrom .images.certManagerWebhook }}"
+      cainjector:
+        image:
+          repository: "{{ registryFrom .images.certManagerCainjector }}/{{ repositoryFrom .images.certManagerCainjector }}"
+          tag: "{{ tagFrom .images.certManagerCainjector }}"
+      acmesolver:
+        image:
+          repository: "{{ registryFrom .images.certManagerAcmesolver }}/{{ repositoryFrom .images.certManagerAcmesolver }}"
+          tag: "{{ tagFrom .images.certManagerAcmesolver }}"
+      startupapicheck:
+        image:
+          repository: "{{ registryFrom .images.certManagerStartupapicheck }}/{{ repositoryFrom .images.certManagerStartupapicheck }}"
+          tag: "{{ tagFrom .images.certManagerStartupapicheck }}"
