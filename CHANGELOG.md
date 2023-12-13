@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.13.1-2] - 2023-12-13
+### Fixed
+- [#5] Fix alias for cert-manager dependency in values.yaml.
+
 ## [v1.13.1-1] - 2023-12-06
 ### Added
 - [#3] Add patch templates for mirroring this chart in airgapped environments.

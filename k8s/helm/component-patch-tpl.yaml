@@ -8,7 +8,7 @@ values:
     certManagerStartupapicheck: quay.io/jetstack/cert-manager-ctl:v1.13.1
 patches:
   values.yaml:
-    certManager:
+    cert-manager:
       image:
         repository: "{{ registryFrom .images.certManagerController }}/{{ repositoryFrom .images.certManagerController }}"
         tag: "{{ tagFrom .images.certManagerController }}"
