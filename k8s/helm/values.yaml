@@ -1,5 +1,8 @@
 # Helm chart values which make cert-manager comply with CIS, BSI and NSA
 # security benchmarks. See https://cert-manager.io/docs/installation/best-practice/
+global:
+  imagePullSecrets:
+    - "ces-container-registries"
 cert-manager:
   automountServiceAccountToken: false
   serviceAccount:
