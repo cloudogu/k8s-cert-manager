@@ -30,6 +30,12 @@ cert-manager:
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
       name: serviceaccount-token
       readOnly: true
+  resources:
+    requests:
+      cpu: 15m
+      memory: 105M
+    limits:
+      memory: 105M
 
   webhook:
     automountServiceAccountToken: false
@@ -58,6 +64,12 @@ cert-manager:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: serviceaccount-token
         readOnly: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 105M
+      limits:
+        memory: 105M
 
   cainjector:
     automountServiceAccountToken: false
@@ -86,6 +98,12 @@ cert-manager:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: serviceaccount-token
         readOnly: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 105M
+      limits:
+        memory: 105M
   startupapicheck:
     automountServiceAccountToken: false
     serviceAccount:
@@ -113,3 +131,9 @@ cert-manager:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: serviceaccount-token
         readOnly: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 105M
+      limits:
+        memory: 105M

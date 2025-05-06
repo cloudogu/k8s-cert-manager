@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.13.1-5] - 2025-05-06
+
+### Changed
+- [#11] Set sensible resource requests and limits
+
 ## [v1.13.1-4] - 2024-10-28
 ### Changed
 - [#9] Use `ces-container-registries` secret for pulling container images as default.
