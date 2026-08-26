@@ -46,6 +46,9 @@ cert-manager:
       operator: Equal
       value: platform
   replicaCount: 2
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
 
   webhook:
     automountServiceAccountToken: false
@@ -90,6 +93,9 @@ cert-manager:
         operator: Equal
         value: platform
     replicaCount: 3
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
 
   cainjector:
     automountServiceAccountToken: false
@@ -134,6 +140,9 @@ cert-manager:
         operator: Equal
         value: platform
     replicaCount: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
 
   startupapicheck:
     automountServiceAccountToken: false
