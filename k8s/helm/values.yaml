@@ -45,6 +45,7 @@ cert-manager:
     - key: node-restriction.kubernetes.io/reserved-for
       operator: Equal
       value: platform
+  replicaCount: 2
 
   webhook:
     automountServiceAccountToken: false
@@ -88,6 +89,7 @@ cert-manager:
       - key: node-restriction.kubernetes.io/reserved-for
         operator: Equal
         value: platform
+    replicaCount: 3
 
   cainjector:
     automountServiceAccountToken: false
@@ -131,6 +133,7 @@ cert-manager:
       - key: node-restriction.kubernetes.io/reserved-for
         operator: Equal
         value: platform
+    replicaCount: 2
 
   startupapicheck:
     automountServiceAccountToken: false
