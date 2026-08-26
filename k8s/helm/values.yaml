@@ -36,6 +36,8 @@ cert-manager:
       memory: 105M
     limits:
       memory: 105M
+  networkPolicy:
+    enabled: true
 
   webhook:
     automountServiceAccountToken: false
@@ -70,6 +72,8 @@ cert-manager:
         memory: 105M
       limits:
         memory: 105M
+    networkPolicy:
+      enabled: true
 
   cainjector:
     automountServiceAccountToken: false
@@ -104,6 +108,8 @@ cert-manager:
         memory: 105M
       limits:
         memory: 105M
+    networkPolicy:
+      enabled: true
   startupapicheck:
     automountServiceAccountToken: false
     serviceAccount:
