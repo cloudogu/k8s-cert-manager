@@ -36,15 +36,21 @@ cert-manager:
       memory: 105M
     limits:
       memory: 105M
+
+  # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
   networkPolicy:
     enabled: true
-  nodeSelector:
-    kubernetes.io/os: linux
-    node-restriction.kubernetes.io/reserved-for: platform
-  tolerations:
-    - key: node-restriction.kubernetes.io/reserved-for
-      operator: Equal
-      value: platform
+
+  ## Isolate cert-manager on dedicated node pools
+  #nodeSelector:
+  #  kubernetes.io/os: linux
+  #  node-restriction.kubernetes.io/reserved-for: platform
+  #tolerations:
+  #  - key: node-restriction.kubernetes.io/reserved-for
+  #    operator: Equal
+  #    value: platform
+
+  # High Availability: ensure at least one working pod with more fail-over pods
   replicaCount: 2
   podDisruptionBudget:
     enabled: true
@@ -83,15 +89,21 @@ cert-manager:
         memory: 105M
       limits:
         memory: 105M
+
+    # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
     networkPolicy:
       enabled: true
-    nodeSelector:
-      kubernetes.io/os: linux
-      node-restriction.kubernetes.io/reserved-for: platform
-    tolerations:
-      - key: node-restriction.kubernetes.io/reserved-for
-        operator: Equal
-        value: platform
+
+    ## Isolate cert-manager on dedicated node pools
+    #nodeSelector:
+    #  kubernetes.io/os: linux
+    #  node-restriction.kubernetes.io/reserved-for: platform
+    #tolerations:
+    #  - key: node-restriction.kubernetes.io/reserved-for
+    #    operator: Equal
+    #    value: platform
+
+    # High Availability: ensure at least one working pod with more fail-over pods
     replicaCount: 3
     podDisruptionBudget:
       enabled: true
@@ -130,15 +142,21 @@ cert-manager:
         memory: 105M
       limits:
         memory: 105M
+
+    # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
     networkPolicy:
       enabled: true
-    nodeSelector:
-      kubernetes.io/os: linux
-      node-restriction.kubernetes.io/reserved-for: platform
-    tolerations:
-      - key: node-restriction.kubernetes.io/reserved-for
-        operator: Equal
-        value: platform
+
+    ## Isolate cert-manager on dedicated node pools
+    #nodeSelector:
+    #  kubernetes.io/os: linux
+    #  node-restriction.kubernetes.io/reserved-for: platform
+    #tolerations:
+    #  - key: node-restriction.kubernetes.io/reserved-for
+    #    operator: Equal
+    #    value: platform
+
+    # High Availability: ensure at least one working pod with more fail-over pods
     replicaCount: 2
     podDisruptionBudget:
       enabled: true
@@ -177,10 +195,12 @@ cert-manager:
         memory: 105M
       limits:
         memory: 105M
-    nodeSelector:
-      kubernetes.io/os: linux
-      node-restriction.kubernetes.io/reserved-for: platform
-    tolerations:
-      - key: node-restriction.kubernetes.io/reserved-for
-        operator: Equal
-        value: platform
+
+    ## Isolate cert-manager on dedicated node pools
+    #nodeSelector:
+    #  kubernetes.io/os: linux
+    #  node-restriction.kubernetes.io/reserved-for: platform
+    #tolerations:
+    #  - key: node-restriction.kubernetes.io/reserved-for
+    #    operator: Equal
+    #    value: platform
