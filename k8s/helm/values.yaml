@@ -164,6 +164,10 @@ cert-manager:
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
+    ## This optimization is only appropriate if cainjector is being used exclusively for the cert-manager webhook. It is not appropriate if cainjector is also being used to manage the TLS certificates for webhooks of other software
+    #extraArgs:
+    #  - --namespace=cert-manager
+    #  - --enable-certificates-data-source=false
 
   startupapicheck:
     automountServiceAccountToken: false
