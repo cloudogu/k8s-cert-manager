@@ -5,7 +5,7 @@
 global:
   imagePullSecrets:
     - name: "ces-container-registries"
-cert-manager:
+certmanager:
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false
