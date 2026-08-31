@@ -60,7 +60,7 @@ node('docker') {
                     }
                 } catch(Exception e) {
                     k3d.collectAndArchiveLogs()
-                    throw e as java.lang.Throwable
+                    throw e
                 } finally {
                     stage('Remove k3d cluster') {
                         k3d.deleteK3d()
