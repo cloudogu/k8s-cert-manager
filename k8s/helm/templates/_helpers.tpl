@@ -23,6 +23,11 @@ app.kubernetes.io/name: {{ include "k8s-cert-manager.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{/*make the original cert-manager alias available without a dash which avoids problems addressing values as well as matching labels */}}
+{{ define "k8s-cert-manager.dashlessChartNameAlias"}}
+{{- printf .Subcharts.certmanager.Chart.Name -}}
+{{ end }}
+
 {{/*copied from cert-manager/_helpers.tpl - these will be used in the template copies*/}}
 
 {{/*

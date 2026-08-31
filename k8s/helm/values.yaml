@@ -5,6 +5,11 @@
 global:
   imagePullSecrets:
     - name: "ces-container-registries"
+# Enable network policies; custom netpol resources without egress rules will overwrite the original netpols.
+# If the original netpols are desired, disable this one and enable the original flags using the field
+# .certmanager.networkPolicy, .certmanager.webhook.networkPolicy, and .certmanager.cainjector.networkPolicy
+networkPolicy:
+  enabled: true
 certmanager:
   automountServiceAccountToken: false
   serviceAccount:
@@ -41,7 +46,7 @@ certmanager:
 
   # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
   networkPolicy:
-    enabled: true
+    enabled: false
 
   ## Isolate cert-manager on dedicated node pools
   #nodeSelector:
@@ -97,7 +102,7 @@ certmanager:
 
     # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
     networkPolicy:
-      enabled: true
+      enabled: false
 
     ## Isolate cert-manager on dedicated node pools
     #nodeSelector:
@@ -150,7 +155,7 @@ certmanager:
 
     # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
     networkPolicy:
-      enabled: true
+      enabled: false
 
     ## Isolate cert-manager on dedicated node pools
     #nodeSelector:
