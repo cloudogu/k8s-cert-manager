@@ -28,7 +28,3 @@ dependencies:
     repository: https://charts.jetstack.io
     alias: certmanager
     condition: certmanager.enabled
-annotations:
-  # Dependency for the cert-manager-CRDs.
-  # Allow all versions up to next major version to avoid breaking changes
-  "k8s.cloudogu.com/ces-dependency/k8s-cert-manager-crd": "1.x.x-0"
