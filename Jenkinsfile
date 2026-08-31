@@ -33,7 +33,6 @@ node('docker') {
                                 {
                                     stage('Generate k8s Resources') {
                                         make 'helm-update-dependencies'
-                                        make 'crd-helm-generate'
                                         make 'helm-generate'
                                         archiveArtifacts "${helmTargetDir}/**/*"
                                     }
@@ -50,7 +49,6 @@ node('docker') {
                     }
 
                     stage('Deploy k8s-cert-manager') {
-                        k3d.helm("install ${repositoryName}-crd ${helmCRDChartDir}")
                         k3d.helm("install ${repositoryName} ${helmChartDir}")
                     }
 
