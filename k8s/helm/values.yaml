@@ -47,6 +47,9 @@ certmanager:
   # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
   networkPolicy:
     enabled: false
+  # install CRDs by default. The flag `.crds.keep` defaults to true which should prevent deleting the CRDs and thus ALL associated certificates
+  crds:
+    enabled: true
 
   ## Isolate cert-manager on dedicated node pools
   #nodeSelector:
