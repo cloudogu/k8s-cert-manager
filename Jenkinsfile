@@ -87,14 +87,12 @@ void stageAutomaticRelease() {
                     .mountJenkinsUser()
                     .inside("--volume ${WORKSPACE}:/${repositoryName} -w /${repositoryName}")
                             {
-                                make 'crd-helm-package'
                                 make 'helm-package'
                                 archiveArtifacts "${helmTargetDir}/**/*"
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'harborhelmchartpush', usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD']]) {
                                     sh ".bin/helm registry login ${registryUrl} --username '${HARBOR_USERNAME}' --password '${HARBOR_PASSWORD}'"
                                     sh ".bin/helm push ${helmChartDir}/${repositoryName}-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}"
-                                    sh ".bin/helm push ${helmCRDChartDir}/${repositoryName}-crd-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}"
                                 }
                             }
         }
