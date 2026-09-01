@@ -156,7 +156,7 @@ certmanager:
       limits:
         memory: 105M
 
-    # Enable network policies; custom netpol resources without egress rules will overwrite the original netpols
+    # Disable network policies; custom netpol resources without egress rules will overwrite the original netpols
     networkPolicy:
       enabled: false
 
