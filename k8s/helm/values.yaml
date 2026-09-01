@@ -60,7 +60,8 @@ certmanager:
   #    operator: Equal
   #    value: platform
 
-  # High Availability: ensure at least one working pod with more fail-over pods
+  # High Availability: ensure at least one working pod with more fail-over pods.
+  # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
   replicaCount: 2
   podDisruptionBudget:
     enabled: true
@@ -117,6 +118,7 @@ certmanager:
     #    value: platform
 
     # High Availability: ensure at least one working pod with more fail-over pods
+    # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
     replicaCount: 3
     podDisruptionBudget:
       enabled: true
@@ -170,6 +172,7 @@ certmanager:
     #    value: platform
 
     # High Availability: ensure at least one working pod with more fail-over pods
+    # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
     replicaCount: 2
     podDisruptionBudget:
       enabled: true
