@@ -1,5 +1,5 @@
 #!groovy
-@Library('github.com/cloudogu/ces-build-lib@3.0.0')
+@Library('github.com/cloudogu/ces-build-lib@5.6.1')
 import com.cloudogu.ces.cesbuildlib.*
 
 git = new Git(this, "cesmarvin")
@@ -33,7 +33,6 @@ node('docker') {
                                 {
                                     stage('Generate k8s Resources') {
                                         make 'helm-update-dependencies'
-                                        make 'crd-helm-generate'
                                         make 'helm-generate'
                                         archiveArtifacts "${helmTargetDir}/**/*"
                                     }
@@ -50,7 +49,6 @@ node('docker') {
                     }
 
                     stage('Deploy k8s-cert-manager') {
-                        k3d.helm("install ${repositoryName}-crd ${helmCRDChartDir}")
                         k3d.helm("install ${repositoryName} ${helmChartDir}")
                     }
 
@@ -62,7 +60,7 @@ node('docker') {
                     }
                 } catch(Exception e) {
                     k3d.collectAndArchiveLogs()
-                    throw e as java.lang.Throwable
+                    throw e
                 } finally {
                     stage('Remove k3d cluster') {
                         k3d.deleteK3d()
@@ -89,14 +87,12 @@ void stageAutomaticRelease() {
                     .mountJenkinsUser()
                     .inside("--volume ${WORKSPACE}:/${repositoryName} -w /${repositoryName}")
                             {
-                                make 'crd-helm-package'
                                 make 'helm-package'
                                 archiveArtifacts "${helmTargetDir}/**/*"
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'harborhelmchartpush', usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD']]) {
                                     sh ".bin/helm registry login ${registryUrl} --username '${HARBOR_USERNAME}' --password '${HARBOR_PASSWORD}'"
                                     sh ".bin/helm push ${helmChartDir}/${repositoryName}-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}"
-                                    sh ".bin/helm push ${helmCRDChartDir}/${repositoryName}-crd-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}"
                                 }
                             }
         }

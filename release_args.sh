@@ -27,26 +27,16 @@ update_versions_modify_files() {
 
   echo "Set images in component patch template"
 
-  local certManagerControllerRepo
-  certManagerControllerRepo=$(yq '.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerController" "${certManagerControllerRepo}:${certManagerAppVersion}"
+  local certManagerImageRegistry
+  certManagerImageRegistry=$(yq '.imageRegistry' < "${certManagerTempValues}")
+  local certManagerNamespace
+  certManagerNamespace=$(yq '.imageNamespace' < "${certManagerTempValues}")
 
-  local webhookRepo
-  webhookRepo=$(yq '.webhook.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerWebhook" "${webhookRepo}:${certManagerAppVersion}"
-
-  local cainInjectorRepo
-  cainInjectorRepo=$(yq '.cainjector.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerCainjector" "${cainInjectorRepo}:${certManagerAppVersion}"
-
-  local acmesolverRepo
-  acmesolverRepo=$(yq '.acmesolver.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerAcmesolver" "${acmesolverRepo}:${certManagerAppVersion}"
-
-  local startupApiCheckRepo
-  startupApiCheckRepo=$(yq '.startupapicheck.image.repository' < "${certManagerTempValues}")
-  setAttributeInComponentPatchTemplate ".values.images.certManagerStartupapicheck" "${startupApiCheckRepo}:${certManagerAppVersion}"
-
+  setAttributeInComponentPatchTemplate ".values.images.certManagerController" "${certManagerImageRegistry}/${certManagerNamespace}/cert-manager-controller:${certManagerAppVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerWebhook" "${certManagerImageRegistry}/${certManagerNamespace}/cert-manager-webhook:${certManagerAppVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerCainjector" "${certManagerImageRegistry}/${certManagerNamespace}/cert-manager-cainjector:${certManagerAppVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerAcmesolver" "${certManagerImageRegistry}/${certManagerNamespace}/cert-manager-acmesolver:${certManagerAppVersion}"
+  setAttributeInComponentPatchTemplate ".values.images.certManagerStartupapicheck" "${certManagerImageRegistry}/${certManagerNamespace}/cert-manager-startupapicheck:${certManagerAppVersion}"
   rm -rf ${certManagerTempChart}
 }
 
