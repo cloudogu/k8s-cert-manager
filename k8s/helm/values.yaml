@@ -51,15 +51,6 @@ certmanager:
   crds:
     enabled: true
 
-  ## Isolate cert-manager on dedicated node pools
-  #nodeSelector:
-  #  kubernetes.io/os: linux
-  #  node-restriction.kubernetes.io/reserved-for: platform
-  #tolerations:
-  #  - key: node-restriction.kubernetes.io/reserved-for
-  #    operator: Equal
-  #    value: platform
-
   # High Availability: ensure at least one working pod with more fail-over pods.
   # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
   replicaCount: 2
@@ -108,15 +99,6 @@ certmanager:
     networkPolicy:
       enabled: false
 
-    ## Isolate cert-manager on dedicated node pools
-    #nodeSelector:
-    #  kubernetes.io/os: linux
-    #  node-restriction.kubernetes.io/reserved-for: platform
-    #tolerations:
-    #  - key: node-restriction.kubernetes.io/reserved-for
-    #    operator: Equal
-    #    value: platform
-
     # High Availability: ensure at least one working pod with more fail-over pods
     # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
     replicaCount: 3
@@ -162,15 +144,6 @@ certmanager:
     networkPolicy:
       enabled: false
 
-    ## Isolate cert-manager on dedicated node pools
-    #nodeSelector:
-    #  kubernetes.io/os: linux
-    #  node-restriction.kubernetes.io/reserved-for: platform
-    #tolerations:
-    #  - key: node-restriction.kubernetes.io/reserved-for
-    #    operator: Equal
-    #    value: platform
-
     # High Availability: ensure at least one working pod with more fail-over pods
     # Disable the podDisruptionBudget if a replicaCount of 1 is used to avoid blocking node draining.
     replicaCount: 2
@@ -215,12 +188,3 @@ certmanager:
         memory: 105M
       limits:
         memory: 105M
-
-    ## Isolate cert-manager on dedicated node pools
-    #nodeSelector:
-    #  kubernetes.io/os: linux
-    #  node-restriction.kubernetes.io/reserved-for: platform
-    #tolerations:
-    #  - key: node-restriction.kubernetes.io/reserved-for
-    #    operator: Equal
-    #    value: platform
