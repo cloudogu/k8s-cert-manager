@@ -1,0 +1,21 @@
+# This chart differs from the original by removing the egress part which is a stronger requirement than the general ingress netpol discussion
+{{- if .Values.networkPolicy.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ template "cert-manager.fullname" . }}-allow-ingress
+  namespace: {{ include "cert-manager.namespace" . }}
+spec:
+  ingress:
+    {{- with .Values.certmanager.networkPolicy.ingress }}
+      {{- toYaml . | nindent 2 }}
+    {{- end }}
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "k8s-cert-manager.dashlessChartNameAlias" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "controller"
+  policyTypes:
+  - Ingress
+{{- end }}

@@ -1,11 +1,11 @@
 apiVersion: v1
 values:
   images:
-    certManagerController: quay.io/jetstack/cert-manager-controller:v1.13.1
-    certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.13.1
-    certManagerCainjector: quay.io/jetstack/cert-manager-cainjector:v1.13.1
-    certManagerAcmesolver: quay.io/jetstack/cert-manager-acmesolver:v1.13.1
-    certManagerStartupapicheck: quay.io/jetstack/cert-manager-ctl:v1.13.1
+    certManagerController: quay.io/jetstack/cert-manager-controller:v1.21.1
+    certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.21.1
+    certManagerCainjector: quay.io/jetstack/cert-manager-cainjector:v1.21.1
+    certManagerAcmesolver: quay.io/jetstack/cert-manager-acmesolver:v1.21.1
+    certManagerStartupapicheck: quay.io/jetstack/cert-manager-startupapicheck:v1.21.1
 patches:
   values.yaml:
     cert-manager:

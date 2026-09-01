@@ -24,11 +24,7 @@ version: 0.0.0-replaceme
 appVersion: "0.0.0-replaceme"
 dependencies:
   - name: cert-manager
-    version: v1.13.1
+    version: v1.21.1
     repository: https://charts.jetstack.io
-    alias: cert-manager
-    condition: cert-manager.enabled
-annotations:
-  # Dependency for the cert-manager-CRDs.
-  # Allow all versions up to next major version to avoid breaking changes
-  "k8s.cloudogu.com/ces-dependency/k8s-cert-manager-crd": "1.x.x-0"
+    alias: certmanager
+    condition: certmanager.enabled
