@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- [#17] Update cert-manager images and Helm dependency to v1.21.3
+
 ## [v1.21.1-1] - 2026-09-01
 ### Changed
 - [#15] Update cert manager to v1.21.1
