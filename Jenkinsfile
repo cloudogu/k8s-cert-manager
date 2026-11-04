@@ -12,7 +12,7 @@ changelog = new Changelog(this)
 repositoryName = "k8s-cert-manager"
 productionReleaseBranch = "main"
 
-goVersion = "1.21"
+goVersion = "1.27.3"
 helmTargetDir = "target/k8s"
 helmChartDir = "${helmTargetDir}/helm"
 helmCRDChartDir = "${helmTargetDir}/helm-crd"
